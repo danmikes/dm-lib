@@ -4,6 +4,8 @@ const mongoose = require('mongoose');
 const Book = require('../models/model').Book;
 const { ObjectId } = require('mongodb').ObjectID;
 
+mongoose.set('useFindAndModify', false);
+
 module.exports = function (app) {
 
   app.route('/api/books')
