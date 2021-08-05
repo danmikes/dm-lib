@@ -1,21 +1,22 @@
-/*
-*
-*
-*       Complete the API routing below
-*       
-*       
-*/
-
 'use strict';
 
 const mongoose = require('mongoose');
-const BookModel = require('../models');
+const BookModel = require('../models/model').Book;
 const { ObjectId } = require('mongodb').ObjectID;
 
 module.exports = function (app) {
 
   app.route('/api/books')
-    .get(function (req, res){
+    .get(function (req, res) {
+      let books = BookModel.find();
+      if (!books) {
+        res.json({ error: "cannot find book" });
+      } else {
+        console.log(books)
+        // let result = books.map((book) => book);
+        res.json({ result: books[0] });
+        // res.json({ result: "found book" });
+      }
       //response will be array of book objects
       //json res format: [{"_id": bookid, "title": book_title, "commentcount": num_of_comments },...]
     })
